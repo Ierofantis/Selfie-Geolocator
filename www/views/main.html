@@ -1,0 +1,34 @@
+<!-- <div class="jumbotron">
+  <h1>Hello!</h1>
+  <p class="lead">
+    <img src="images/camera.png" alt="selfie">
+    <br> Always a pleasure to give you all the details you need from your selfie!
+  </p>
+  <button class="btn btn-lg btn-success" ng-click="qualityFunc()">Selfie me please</button>
+</div> -->
+<div class="row marketing">
+  <div ng-if="dataLoading" class="spinner">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+  </div>
+  <div class="text-center" ng-show="showVideo">  
+  <!--<video  id="video" autoplay></video></div>
+  <canvas id="canvas" style="display:none;" width="300" height="400"></canvas>-->
+  <img id = "myImage"></img>
+  </div>
+  <!-- <h2>Show me the Rating</h2>
+  <p>
+    {{rating}}
+  </p> -->
+  <p  style="display:none;" id="googleMap"></p>
+  <!-- <h2>What type of place is It?</h2>
+  <p>{{types}}</p> -->
+  <div  id = "buttons" class="row text-center">
+    <div class="col-xs-6">     
+       <button class="btn btn-success" id = "cameraTakePicture">Selfie me please</button>
+    </div>
+    <div class="col-xs-6">
+     <button class="btn btn-danger" ng-click="savePlaces(x)">Save this moment</button>
+    </div>
+  </div>  
+  </div>  

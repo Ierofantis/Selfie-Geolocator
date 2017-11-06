@@ -1,0 +1,18 @@
+<div class="row marketing">
+ <!--  <div id="wrapper">
+    <div id="columns"> -->
+      <div ng-repeat="item in $storage track by $index">
+        <div class="pin">
+         <span class="glyphicon glyphicon-remove" ng-click="deletePlaces($index)"></span>
+          <img src="{{item.image}}" />
+          <p>
+            I took this photo on {{item.rating}} <!-- with type {{item.types}} -->
+            <button type="button" class="btn btn-default btn-sm" ng-click="downloads(item.image)">
+              <span class="glyphicon glyphicon-download"></span>
+            </button>
+          </p>
+        </div>
+      </div>
+  <!--   </div>
+  </div> -->
+</div>
