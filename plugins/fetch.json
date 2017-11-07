@@ -10,7 +10,7 @@
   "cordova-plugin-camera": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-camera"
+      "id": "https://github.com/apache/cordova-plugin-camera"
     },
     "is_top_level": true,
     "variables": {}
@@ -27,6 +27,30 @@
     "source": {
       "type": "registry",
       "id": "cordova-plugin-geolocation@^2.4.3"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-save-image": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-save-image"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-save-image-gallery": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-save-image-gallery@0.0.26"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-inappbrowser": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-inappbrowser@1.7.1"
     },
     "is_top_level": true,
     "variables": {}

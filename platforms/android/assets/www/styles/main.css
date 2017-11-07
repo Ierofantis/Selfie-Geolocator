@@ -8,10 +8,10 @@
 body {
   padding: 0; 
 }
-canvas{
-  display: inline-block;
-  vertical-align: baseline
+#myImage{
+  padding:60px;
 }
+
 #wrapper {
   width: 90%;
   max-width: 1100px;

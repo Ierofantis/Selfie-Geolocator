@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.example.selfie" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.app.selfie" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="Camera">
         <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
     </feature>
@@ -10,9 +10,18 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <name>selfie</name>
+    <feature name="SaveImage">
+        <param name="android-package" value="com.quiply.cordova.saveimage.SaveImage" />
+    </feature>
+    <feature name="SaveImageGallery">
+        <param name="android-package" value="com.agomezmoron.saveImageGallery.SaveImageGallery" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <name>SelfieMe</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        A selfie app
     </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team
@@ -26,5 +35,9 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-intent href="market:*" />
+    <icon density="ldpi" src="www/images/camera.png" />
+    <icon density="mdpi" src="www/images/camera.png" />
+    <icon density="hdpi" src="www/images/camera.png" />
+    <icon density="xhdpi" src="www/images/camera.png" />
     <preference name="loglevel" value="DEBUG" />
 </widget>

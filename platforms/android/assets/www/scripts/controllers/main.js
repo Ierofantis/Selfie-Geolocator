@@ -11,77 +11,90 @@
 //bower ngstorage and not ngStorage!
 
 angular.module('qcApp')
-  .controller('MainCtrl', function($scope, $localStorage,$location, $sessionStorage, mainServiceObj) {
+  .controller('MainCtrl', function ($scope, $localStorage, $location, $sessionStorage, mainServiceObj) {
 
     var place_id = '';
     var latitude = '';
-    var longitude = ''; 
-    var images = ''   
+    var longitude = '';
+    var images = ''
     var mapProp = {
       center: new google.maps.LatLng(51.508742, -0.120850),
       zoom: 15,
     };
-     $scope.dataLoading = false;
-     $scope.showVideo = true;
-     
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
+    $scope.dataLoading = false;
+    $scope.showVideo = true;
+
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(showPosition);
+    // } else {
+    //   console.log("Geolocation is not supported by this browser.");
+    // }
 
 
-    function showPosition(position) {
+    // function showPosition(position) {
+    //   latitude = position.coords.latitude;
+    //   longitude = position.coords.longitude;
+    // }
+
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+    function onSuccess(position) {
       latitude = position.coords.latitude;
       longitude = position.coords.longitude;
+    };
+
+    function onError(error) {
+      alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
     }
 
-    document.getElementById("cameraTakePicture").addEventListener 
-      ("click", cameraTakePicture); 
 
-      function cameraTakePicture() {      
-      navigator.camera.getPicture(onSuccess, onFail, {  
-          quality: 50, 
-          destinationType: Camera.DestinationType.DATA_URL 
-      });  
-      
-      function onSuccess(imageData) { 
-          var image = document.getElementById('myImage'); 
-          image.src = "data:image/jpeg;base64," + imageData; 
-          localStorage.setItem("canvas", image.src);
-        mainServiceObj.getCoordinates(latitude, longitude)
-        .then(function(success) {
-          //wait(2000)
-          console.log(success)
-          place_id = success.data.results[0].place_id;
+    // document.getElementById("cameraTakePicture").addEventListener 
+    //   ("click", cameraTakePicture); 
 
-          //Configuring the map and refreshing with latitude and longitude  
+    //   function cameraTakePicture() {      
+    //   navigator.camera.getPicture(onSuccess, onFail, {  
+    //       quality: 50, 
+    //       destinationType: Camera.DestinationType.DATA_URL 
+    //   });  
 
-          var mapProp = {
-            center: new google.maps.LatLng(latitude, longitude),
-            zoom: 15,
-          };
-          var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);          
+    //   function onSuccess(imageData) { 
+    //       var image = document.getElementById('myImage'); 
+    //       image.src = "data:image/jpeg;base64," + imageData; 
+    //       localStorage.setItem("canvas", image.src);
+    //     mainServiceObj.getCoordinates(latitude, longitude)
+    //     .then(function(success) {
+    //       //wait(2000)
+    //       console.log(success)
+    //       place_id = success.data.results[0].place_id;
 
-          mainServiceObj.getQuality(place_id)
-            .then(function(success) {
-              console.log(success)
-              $scope.types = success.data.result.types[0];              
-              $scope.rating = '' + success.data.result.name;               
-              $scope.dataLoading = false; 
-              $scope.showVideo = true;        
-            });
-        });
-      
-        
-      }  
-      
-      function onFail(message) { 
-          alert('Failed because: ' + message); 
-      } 
-    }
+    //       //Configuring the map and refreshing with latitude and longitude  
 
-   // var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    //       var mapProp = {
+    //         center: new google.maps.LatLng(latitude, longitude),
+    //         zoom: 15,
+    //       };
+    //       var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);          
+
+    //       mainServiceObj.getQuality(place_id)
+    //         .then(function(success) {
+    //           console.log(success)
+    //           $scope.types = success.data.result.types[0];              
+    //           $scope.rating = '' + success.data.result.name;               
+    //           $scope.dataLoading = false; 
+    //           $scope.showVideo = true;        
+    //         });
+    //     });
+
+
+    //   }  
+
+    //   function onFail(message) { 
+    //       alert('Failed because: ' + message); 
+    //   } 
+    // }
+
+    // var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
     // Elements for taking the snapshot
 
@@ -96,7 +109,7 @@ angular.module('qcApp')
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       // Not adding `{ audio: true }` since we only want video now
 
-      navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+      navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
         video.src = window.URL.createObjectURL(stream);
         video.play();
       });
@@ -121,33 +134,75 @@ angular.module('qcApp')
 
     //The function for finding place details
 
-    $scope.qualityFunc = function() {          
+    document.getElementById("cameraTakePicture").addEventListener
+      ("click", cameraTakePicture);
 
-      context.drawImage(video, 0, 0, 300, 400);
+    function cameraTakePicture() {
+
       $scope.dataLoading = true;
       $scope.showVideo = false;
+      navigator.geolocation.getCurrentPosition(onSuccesss, onError);
 
-      mainServiceObj.getCoordinates(latitude, longitude)
-        .then(function(success) {
-          wait(2000)
-          place_id = success.data.results[0].place_id;
+      function onSuccesss(position) {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+      };
 
-          //Configuring the map and refreshing with latitude and longitude  
+      function onError(error) {
+        alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+      }
 
-          var mapProp = {
-            center: new google.maps.LatLng(latitude, longitude),
-            zoom: 15,
-          };
-          var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);          
+      // context.drawImage(video, 0, 0, 300, 400);
+      // $scope.dataLoading = true;
+      // $scope.showVideo = false;
 
-          mainServiceObj.getQuality(place_id)
-            .then(function(success) {
-              $scope.types = success.data.result.types[0];              
-              $scope.rating = '' + success.data.result.name;               
-              $scope.dataLoading = false; 
-              $scope.showVideo = true;        
-            });
-        });
+      navigator.camera.getPicture(onSuccess, onFail, {
+        quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 100,
+        targetHeight: 100,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false,
+        correctOrientation: true
+      });
+
+      function onSuccess(imageData) {
+        var image = document.getElementById('myImage');
+        image.src = "data:image/jpeg;base64," + imageData;
+        localStorage.setItem("canvas", image.src);
+
+        mainServiceObj.getCoordinates(latitude, longitude)
+          .then(function (success) {
+            wait(2000)
+            //console.log(success)
+            place_id = success.data.results[0].place_id;
+
+            //Configuring the map and refreshing with latitude and longitude  
+            var mapProp = {
+              center: new google.maps.LatLng(latitude, longitude),
+              zoom: 15,
+            };
+
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+            mainServiceObj.getQuality(place_id)
+              .then(function (success) {
+                // console.log(success)
+                $scope.types = success.data.result.types[0];
+                $scope.rating = '' + success.data.result.name;
+                $scope.dataLoading = false;
+                $scope.showVideo = true;
+              });
+          });
+
+      }
+
+      function onFail(message) {
+        alert('Failed because: ' + message);
+      }
     }
 
     //Local storage functionality
@@ -160,27 +215,24 @@ angular.module('qcApp')
       $scope.list = $localStorage.list;
     }
 
-     $scope.downloads = function(x) {
-     download(x, "selfie.png", "image/png")     
+    $scope.downloads = function (x) {
+      download(x, "selfie.png", "image/png")
     }
 
-
-    $scope.savePlaces = function(x) {     
-
+    $scope.savePlaces = function (x) {
       // localStorage.setItem("canvas", images);
-      $scope.image = localStorage.getItem("canvas");       
+      $scope.image = localStorage.getItem("canvas");
       $scope.x.types = $scope.types;
       $scope.x.rating = $scope.rating;
       $scope.x.image = $scope.image;
 
       $scope.list.push(x);
       $localStorage.list = $scope.list;
-      $scope.$storage = $localStorage.list;  
-      $location.url('/MyPlaces'); 
-             
+      $scope.$storage = $localStorage.list;
+      $location.url('/MyPlaces');
     }
 
-    $scope.deletePlaces = function(x) {
+    $scope.deletePlaces = function (x) {
       $localStorage.list.splice(x, 1);
     }
   });
