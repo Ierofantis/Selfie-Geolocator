@@ -24,19 +24,6 @@ angular.module('qcApp')
     $scope.dataLoading = false;
     $scope.showVideo = true;
 
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition(showPosition);
-    // } else {
-    //   console.log("Geolocation is not supported by this browser.");
-    // }
-
-
-    // function showPosition(position) {
-    //   latitude = position.coords.latitude;
-    //   longitude = position.coords.longitude;
-    // }
-
-
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
     function onSuccess(position) {
@@ -46,61 +33,7 @@ angular.module('qcApp')
 
     function onError(error) {
       alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
-    }
-
-
-    // document.getElementById("cameraTakePicture").addEventListener 
-    //   ("click", cameraTakePicture); 
-
-    //   function cameraTakePicture() {      
-    //   navigator.camera.getPicture(onSuccess, onFail, {  
-    //       quality: 50, 
-    //       destinationType: Camera.DestinationType.DATA_URL 
-    //   });  
-
-    //   function onSuccess(imageData) { 
-    //       var image = document.getElementById('myImage'); 
-    //       image.src = "data:image/jpeg;base64," + imageData; 
-    //       localStorage.setItem("canvas", image.src);
-    //     mainServiceObj.getCoordinates(latitude, longitude)
-    //     .then(function(success) {
-    //       //wait(2000)
-    //       console.log(success)
-    //       place_id = success.data.results[0].place_id;
-
-    //       //Configuring the map and refreshing with latitude and longitude  
-
-    //       var mapProp = {
-    //         center: new google.maps.LatLng(latitude, longitude),
-    //         zoom: 15,
-    //       };
-    //       var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);          
-
-    //       mainServiceObj.getQuality(place_id)
-    //         .then(function(success) {
-    //           console.log(success)
-    //           $scope.types = success.data.result.types[0];              
-    //           $scope.rating = '' + success.data.result.name;               
-    //           $scope.dataLoading = false; 
-    //           $scope.showVideo = true;        
-    //         });
-    //     });
-
-
-    //   }  
-
-    //   function onFail(message) { 
-    //       alert('Failed because: ' + message); 
-    //   } 
-    // }
-
-    // var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-    // Elements for taking the snapshot
-
-    // var canvas = document.getElementById('canvas');
-    // var context = canvas.getContext('2d');
-    // var video = document.getElementById('video');         
+    }    
 
     //Cordova settings for camera
 
@@ -116,21 +49,7 @@ angular.module('qcApp')
     }
 
     $scope.rating = '';
-    $scope.types = ' ';
-
-
-    //html5 geolocation window when at home
-
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition(showPosition);
-    // } else {
-    //   console.log("Geolocation is not supported by this browser.");
-    // }
-
-    // function showPosition(position) {
-    //   latitude = position.coords.latitude;
-    //   longitude = position.coords.longitude;
-    // }
+    $scope.types = ' '; 
 
     //The function for finding place details
 
@@ -152,10 +71,6 @@ angular.module('qcApp')
         alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
       }
 
-      // context.drawImage(video, 0, 0, 300, 400);
-      // $scope.dataLoading = true;
-      // $scope.showVideo = false;
-
       navigator.camera.getPicture(onSuccess, onFail, {
         quality: 50,
         destinationType: Camera.DestinationType.DATA_URL,
@@ -176,11 +91,9 @@ angular.module('qcApp')
 
         mainServiceObj.getCoordinates(latitude, longitude)
           .then(function (success) {
-           // wait(1000)
-            //console.log(success)
+         
             place_id = success.data.results[0].place_id;
-
-            //Configuring the map and refreshing with latitude and longitude  
+e  
             var mapProp = {
               center: new google.maps.LatLng(latitude, longitude),
               zoom: 15,
@@ -220,7 +133,7 @@ angular.module('qcApp')
     }
 
     $scope.savePlaces = function (x) {
-      // localStorage.setItem("canvas", images);
+
       $scope.image = localStorage.getItem("canvas");
       $scope.x.types = $scope.types;
       $scope.x.rating = $scope.rating;

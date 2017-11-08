@@ -176,7 +176,7 @@ angular.module('qcApp')
 
         mainServiceObj.getCoordinates(latitude, longitude)
           .then(function (success) {
-            wait(2000)
+           // wait(1000)
             //console.log(success)
             place_id = success.data.results[0].place_id;
 
