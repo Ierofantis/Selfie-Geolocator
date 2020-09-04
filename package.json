@@ -42,7 +42,7 @@
     "cordova-plugin-camera": "git+https://github.com/apache/cordova-plugin-camera.git",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-geolocation": "^2.4.3",
-    "cordova-plugin-inappbrowser": "^1.7.1",
+    "cordova-plugin-inappbrowser": "^4.0.0",
     "cordova-plugin-save-image": "^0.2.6",
     "cordova-plugin-whitelist": "^1.3.2",
     "cordova-save-image-gallery": "0.0.26"
